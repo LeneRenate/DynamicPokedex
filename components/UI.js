@@ -1,0 +1,7 @@
+/********* 
+Making the 
+*********/
+
+function makePokemonCard() {
+
+}

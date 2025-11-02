@@ -1,0 +1,74 @@
+:root {
+  --background: #ddeade;
+  --pokeball-light: #eb6d60;
+  --pokeball-dark: #e85344;
+  --grass: #9bcc50;
+  --grass-border: #638a28;
+  --fire: #fd7d24;
+  --fire-border: #b14b02;
+  --water: #4592c4;
+  --water-border: #255474;
+  --poison: #b97fc9;
+  --poison-border: #7e3c90;
+  --bug: #729f3f;
+  --bug-border: #34491d;
+  --normal: #a4acaf;
+  --normal-border: #6c767a;
+  --flying: #7dc0d3;
+  --flying-border: #3b93ab;
+  --electric: #eed535;
+  --electric-border: #a4900e;
+  --ground: #ae9882;
+  --ground-border: #6c5947;
+  --fairy: #fdb9e9;
+  --fairy-border: #fa52c7;
+  --fighting: #d56723;
+  --fighting-border: #6e3512;
+  --psychic: #f366b9;
+  --psychic-border: #d41183;
+  --rock: #a38c21;
+  --rock-border: #3f360d;
+  --ice: #51c4e7;
+  --ice-border: #188fb4;
+  --ghost: #7b62a3;
+  --ghost-border: #483960;
+  --dragon: #a28993;
+  --dragon-border: #644f57;
+  --steel: #9eb7b8;
+  --steel-border: #628384;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100svw;
+  min-height: 900px;
+  height: 100svh;
+  background-color: var(--background);
+}
+
+header {
+  height: 20svh;
+  display: flex;
+  background-image: url(./Images/PokedexPattern.png);
+  background-size: 50svh;
+  background-position: 4% 2%;
+  background-color: var(--background);
+  /* position: sticky;
+  top: 0; */
+}
+
+#pokedexImg {
+  height: 65%;
+  margin: auto 5svw;
+}
+
+h1 {
+  font-size: 40px;
+  margin-top: 7vh;
+  text-shadow: 1px 1px darkslategrey;
+}
