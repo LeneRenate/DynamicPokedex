@@ -1,7 +1,3 @@
-// fetch("https://pokeapi.co/api/v2/pokemon/bulbasaur")
-//   .then((response) => response.json())
-//   .then((data) => console.log(data));
-
 /*** 
 Base URL: https://pokeapi.co/api/v2
 All pokemons: https://pokeapi.co/api/v2/pokemon
@@ -12,21 +8,76 @@ https://pokeapi.co/api/v2/pokemon/1
 (`${API_BASE}/pokemon?limit=100000&offset=0`);
 ***/
 
+/** Establish api and html-connections */
 const API_BASE = "https://pokeapi.co/api/v2";
-
-async function loadPokemon(nameOrId) {
-  try {
-    const pokemon = await getJSON(`${API_BASE}/pokemon/${nameOrId}`);
-  } catch (err) {
-    alert(`Could not load Pokémon: ${err.message}`);
-  }
-}
-
-import { makePokemonCard } from "./components/UI";
-import { makeInfoCard } from "./components/infoCard";
-
 const searchSection = document.getElementById("searchSection");
 const typeGrid = document.getElementById("typeGrid");
 const pokemonDisplay = document.getElementById("pokemonDisplay");
 
-pokemonCard.addEventlistener("click", makeInfoCard());
+function capitalize(s) {
+  return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+}
+
+/** Fetch a single Pokémon by name or ID */
+async function fetchPokemon(nameOrId) {
+  const res = await fetch(
+    `${API_BASE}/pokemon/${String(nameOrId).toLowerCase()}`
+  );
+  return await res.json(); // returns full Pokémon object
+}
+
+/**  Making the main display of all pokemon */
+function makePokemonCard(p) {
+  const pokemonCard = document.createElement("article");
+  pokemonCard.classList.add("pokemonCard");
+  // pokemonCard.classList.add("");
+  const pokemonImg = document.createElement("img");
+  pokemonImg.classList.add("pokemonImg");
+  pokemonImg.src = `ImagesPokemon/${p.name}.png`;
+  const pokemonNumber = document.createElement("p");
+  pokemonNumber.classList.add("pokemonNumber");
+  pokemonNumber.textContent = "#" + p.id;
+  const pokemonName = document.createElement("p");
+  pokemonName.classList.add("pokemonName");
+  pokemonName.textContent = capitalize(p.name);
+  pokemonCard.append(pokemonImg, pokemonNumber, pokemonName);
+  pokemonDisplay.append(pokemonCard);
+}
+
+/** Fetch the first n Pokémon as an array of objects */
+async function fetchFirstNPokemon(n) {
+  const ids = Array.from({ length: n }, (_, i) => i + 1);
+
+  // Fetch all in parallel
+  const pokemonArray = await Promise.all(ids.map((id) => fetchPokemon(id)));
+
+  // Return array of Pokémon objects
+  return pokemonArray;
+}
+
+// console.log(fetchPokemon("ditto"));
+
+/** Example usage*/
+async function renderPokemon() {
+  // Get the first 10 Pokémon
+  const displayedPokemon = await fetchFirstNPokemon(20);
+  // console.log(firstTen);
+
+  // Iterate easily
+  displayedPokemon.forEach((p) => {
+    // console.log(p.name);
+    // const types = p.types.map((t) => t.type.name);
+    // console.log(types.join(", "));
+    // console.log(p.id);
+    makePokemonCard(p);
+  });
+}
+
+renderPokemon();
+
+async function fetchTypes() {
+  const res = await fetch(`${API_BASE}/type`);
+  return await res.json(); // returns full Pokémon object
+}
+
+console.log(fetchTypes());

@@ -1,10 +1,15 @@
-const API_BASE = "https://pokeapi.co/api/v2/pokemon";
+import { API_BASE } from "./main";
+import { makePokemonCard } from "./components/UI";
 
 /** Fetch a single Pokémon by name or ID */
 async function fetchPokemon(nameOrId) {
-  const res = await fetch(`${API_BASE}/${nameOrId.toLowerCase()}`);
+  const res = await fetch(
+    `${API_BASE}/pokemon/${String(nameOrId).toLowerCase()}`
+  );
   return await res.json(); // returns full Pokémon object
 }
+
+// console.log(fetchPokemon("89"));
 
 /** Fetch the first n Pokémon as an array of objects */
 async function fetchFirstNPokemon(n) {
@@ -17,23 +22,22 @@ async function fetchFirstNPokemon(n) {
   return pokemonArray;
 }
 
-/** Example usage */
-async function example() {
+// console.log(fetchFirstNPokemon(10));
+
+/** Example usage*/
+export async function example() {
   // Get the first 10 Pokémon
-  const testArray = await fetchFirstNPokemon(6);
+  const firstTen = await fetchFirstNPokemon(10);
+  // console.log(firstTen);
 
   // Iterate easily
   firstTen.forEach((p) => {
-    console.log(p.name); // "bulbasaur", "ivysaur", etc.
-    console.log(p.id); // Pokémon ID
-    console.log(p.types); // Array of type objects
-    console.log(p.sprites.front_default); // sprite image
+    console.log(p.name);
+    console.log(p.id);
+    makePokemonCard(p);
   });
 
   // Fetch a specific Pokémon by name
-  const pikachu = await fetchPokemon("pikachu");
-  console.log(pikachu);
+  // const pikachu = await fetchPokemon("pikachu");
+  // console.log(pikachu);
 }
-
-const pikachu = await fetchPokemon("122");
-console.log(pikachu);

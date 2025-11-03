@@ -72,3 +72,42 @@ h1 {
   margin-top: 7vh;
   text-shadow: 1px 1px darkslategrey;
 }
+
+/* 
+main > 3*section
+#searchSection
+#typeGrid
+#pokemonDisplay
+*/
+
+/*  
+#pokemonDisplay
+  article  .pokemonCard
+    img  .pokemonImg
+    p  .pokemonNumber
+    p  .pokemonName
+*/
+
+#pokemonDisplay {
+  width: 85svw;
+  margin: 10svh auto;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pokemonCard {
+  width: 200px;
+  border: 2px solid black;
+  margin: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemonImg {
+  width: 150px;
+  height: 150px;
+}
