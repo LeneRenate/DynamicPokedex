@@ -30,7 +30,14 @@ async function fetchPokemon(nameOrId) {
 function makePokemonCard(p) {
   const pokemonCard = document.createElement("article");
   pokemonCard.classList.add("pokemonCard");
-  // pokemonCard.classList.add("");
+  const pokemonTypes = p.types.map((t) => t.type.name);
+  // console.log(types.length);
+  if (pokemonTypes.length === 2) {
+    pokemonCard.classList.add(pokemonTypes[0]);
+    pokemonCard.classList.add(pokemonTypes[1]);
+  } else {
+    pokemonCard.classList.add(pokemonTypes[0]);
+  }
   const pokemonImg = document.createElement("img");
   pokemonImg.classList.add("pokemonImg");
   pokemonImg.src = `ImagesPokemon/${p.name}.png`;
@@ -47,6 +54,7 @@ function makePokemonCard(p) {
 /** Fetch the first n Pokémon as an array of objects */
 async function fetchFirstNPokemon(n) {
   const ids = Array.from({ length: n }, (_, i) => i + 1);
+  // console.log(ids);
 
   // Fetch all in parallel
   const pokemonArray = await Promise.all(ids.map((id) => fetchPokemon(id)));
@@ -57,18 +65,14 @@ async function fetchFirstNPokemon(n) {
 
 // console.log(fetchPokemon("ditto"));
 
-/** Example usage*/
+/** Showing all pokemons*/
 async function renderPokemon() {
   // Get the first 10 Pokémon
-  const displayedPokemon = await fetchFirstNPokemon(20);
+  const displayedPokemon = await fetchFirstNPokemon(9);
   // console.log(firstTen);
 
   // Iterate easily
   displayedPokemon.forEach((p) => {
-    // console.log(p.name);
-    // const types = p.types.map((t) => t.type.name);
-    // console.log(types.join(", "));
-    // console.log(p.id);
     makePokemonCard(p);
   });
 }
@@ -77,7 +81,17 @@ renderPokemon();
 
 async function fetchTypes() {
   const res = await fetch(`${API_BASE}/type`);
-  return await res.json(); // returns full Pokémon object
+  return await res.json();
 }
 
 console.log(fetchTypes());
+
+async function makeTypeArray() {
+  const types = await fetchTypes;
+}
+
+makeTypeArray();
+
+// const displayedTypes = await fetchTypes();
+
+// const types = p.types.map((t) => t.type.name);

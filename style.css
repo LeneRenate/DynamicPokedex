@@ -105,9 +105,14 @@ main > 3*section
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .pokemonImg {
   width: 150px;
   height: 150px;
+}
+
+.grass {
+  background-color: var(--grass);
 }
