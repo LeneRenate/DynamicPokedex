@@ -4,6 +4,7 @@ All pokemons: https://pokeapi.co/api/v2/pokemon
 Specific pokemon: https://pokeapi.co/api/v2/pokemon/bulbasaur
 OR
 https://pokeapi.co/api/v2/pokemon/1
+All types: https://pokeapi.co/api/v2/type
 
 (`${API_BASE}/pokemon?limit=100000&offset=0`);
 ***/
@@ -86,12 +87,26 @@ async function fetchTypes() {
 
 console.log(fetchTypes());
 
+const typesArray = [];
+
 async function makeTypeArray() {
-  const types = await fetchTypes;
+  const types = await fetchTypes();
+  // console.log(types.results[17]);
+  for (let i = 0; i < 18; i++) {
+    typesArray.push(types.results[i].name);
+  }
+  console.log(typesArray);
 }
 
-makeTypeArray();
+async function renderTypes() {
+  await makeTypeArray();
+  for (let i = 0; i < 18; i++) {
+    const typeBtn = document.createElement("button");
+    typeBtn.classList.add("typeBtn");
+    typeBtn.classList.add(typesArray[i]);
+    typeBtn.textContent = typesArray[i];
+    typeGrid.append(typeBtn);
+  }
+}
 
-// const displayedTypes = await fetchTypes();
-
-// const types = p.types.map((t) => t.type.name);
+renderTypes();

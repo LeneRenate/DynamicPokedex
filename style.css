@@ -73,6 +73,16 @@ h1 {
   text-shadow: 1px 1px darkslategrey;
 }
 
+/*
+Base-style for each type
+For both pokemonCards and buttons
+To be moved to JS?
+*/
+
+.grass {
+  background-color: var(--grass);
+}
+
 /* 
 main > 3*section
 #searchSection
@@ -80,9 +90,28 @@ main > 3*section
 #pokemonDisplay
 */
 
+/* 
+#typeGrid
+  button  .typeBtn  .{type}
+*/
+
+#typeGrid {
+  width: 60%;
+  margin: 10svh auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 30px;
+}
+
+.typeBtn {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid white;
+}
+
 /*  
 #pokemonDisplay
-  article  .pokemonCard
+  article  .pokemonCard  .{type}
     img  .pokemonImg
     p  .pokemonNumber
     p  .pokemonName
@@ -100,7 +129,8 @@ main > 3*section
 
 .pokemonCard {
   width: 200px;
-  border: 2px solid black;
+  border: 1px solid black;
+  border-radius: 10px;
   margin: 20px;
 
   display: flex;
@@ -111,8 +141,4 @@ main > 3*section
 .pokemonImg {
   width: 150px;
   height: 150px;
-}
-
-.grass {
-  background-color: var(--grass);
 }
