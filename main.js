@@ -69,23 +69,21 @@ async function fetchFirstNPokemon(n) {
 /** Showing all pokemons*/
 async function renderPokemon() {
   // Get the first 10 Pokémon
-  const displayedPokemon = await fetchFirstNPokemon(9);
-  // console.log(firstTen);
+  const allPokemon = await fetchFirstNPokemon(9);
+  // console.log(typeof allPokemon);
 
   // Iterate easily
-  displayedPokemon.forEach((p) => {
+  allPokemon.forEach((p) => {
     makePokemonCard(p);
   });
 }
-
-renderPokemon();
 
 async function fetchTypes() {
   const res = await fetch(`${API_BASE}/type`);
   return await res.json();
 }
 
-console.log(fetchTypes());
+// console.log(fetchTypes());
 
 const typesArray = [];
 
@@ -95,7 +93,7 @@ async function makeTypeArray() {
   for (let i = 0; i < 18; i++) {
     typesArray.push(types.results[i].name);
   }
-  console.log(typesArray);
+  // console.log(typesArray);
 }
 
 async function renderTypes() {
@@ -109,4 +107,22 @@ async function renderTypes() {
   }
 }
 
-renderTypes();
+async function filterByType() {
+  await renderPokemon(); // vent til alle kort er laget
+  await renderTypes(); // vent til alle knapper er laget
+
+  // Nå eksisterer alt i DOM – koble filteret
+  const typeButtons = document.querySelectorAll(".typeBtn");
+  const pokemonCards = document.querySelectorAll(".pokemonCard");
+
+  typeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const type = btn.textContent.trim().toLowerCase();
+      pokemonCards.forEach((card) => {
+        card.style.display = card.classList.contains(type) ? "flex" : "none";
+      });
+    });
+  });
+}
+
+filterByType();
