@@ -52,7 +52,7 @@ body {
 
 header {
   height: 20svh;
-  background-image: url(./Images/PokedexPattern.png);
+  background-image: url(./images/PokedexPattern.png);
   background-size: 50svh;
   background-position: 4% 2%;
   background-color: var(--background);
