@@ -51,18 +51,20 @@ body {
 
 header {
   height: 20svh;
-  display: flex;
   background-image: url(./Images/PokedexPattern.png);
   background-size: 50svh;
   background-position: 4% 2%;
   background-color: var(--background);
   position: sticky;
   top: 0;
+
+  display: flex;
+  flex-direction: row;
 }
 
 #pokedexImg {
   height: 65%;
-  margin: auto 5svw;
+  margin: 5svh 5svw;
 }
 
 h1 {
@@ -93,15 +95,11 @@ main > 3*section
   button  .typeBtn  .{type}
 */
 
-button .dark {
-  display: hidden;
-}
-
 #typeGrid {
   width: 60%;
   margin: 10svh auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 20px 30px;
 }
 
@@ -150,3 +148,5 @@ button .dark {
   width: 150px;
   height: 150px;
 }
+
+/*  */

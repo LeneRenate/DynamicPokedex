@@ -112,11 +112,12 @@ async function renderTypes() {
       typeGrid.append(typeBtn);
     }
   }
-  const resetBtn = document.createElement("button");
-  resetBtn.id.add("resetBtn");
-  resetBtn.addEventListener("click", renderPokemon);
-  typeGrid.append(resetBtn);
 }
+
+// const resetBtn = document.createElement("button");
+// resetBtn.id.add("resetBtn");
+// resetBtn.addEventListener("click", renderPokemon);
+// typeGrid.append(resetBtn);
 
 async function filterByType() {
   await renderPokemon(); // await all pokemonCards
@@ -136,3 +137,77 @@ async function filterByType() {
 }
 
 filterByType();
+
+// async function fetchCategory(nameOrId) {
+//   const res = await fetch(`${BASE_URL}/pokemon-species/${nameOrId}`);
+//   return await res.json(); // returns full Pokémon object
+// }
+
+// console.log(fetchCategory("ditto"));
+
+const pokeModal = document.getElementById("#myModal");
+
+async function makeModal() {
+  const idArticle = document.createElement("article");
+  const modalID = document.createElement("p");
+  modalID.classList.add("modalID");
+  modalID.textContent = "";
+  const modalName = document.createElement("p");
+  modalName.classList.add("modalName");
+  modalName.textContent = "";
+  const modalImg = document.createElement("img");
+  modalImg.classList.add("modalImg");
+  modalImg.src = "./ImagesPokemon/${modalName}";
+  idArticle.append(modalID, modalName, modalImg);
+
+  const baseArticle = document.createElement("article");
+  const modalType = document.createElement("p");
+  modalType.classList.add("modalType");
+  modalType.textContent = "";
+  const modalCategory = document.createElement("p");
+  modalCategory.classList.add("modalCategory");
+  modalCategory.textContent = "";
+  const modalHeight = document.createElement("p");
+  modalHeight.classList.add("modalHeight");
+  modalHeight.textContent = "";
+  const modalWeight = document.createElement("p");
+  modalWeight.classList.add("modalWeight");
+  modalWeight.textContent = "";
+  const modalAbilities = document.createElement("p");
+  modalAbilities.classList.add("modalAbilities");
+  modalAbilities.textContent = "";
+  baseArticle.append(
+    modalType,
+    modalCategory,
+    modalHeight,
+    modalWeight,
+    modalAbilities
+  );
+
+  // const statsArticle = document.createElement("article");
+
+  // const movesArticle = document.createElement("article");
+
+  pokeModal.append(idArticle, baseArticle);
+}
+
+// MODAL  -  Pop-up info on all pokemons
+/*
+Lag modal i html med placeholders for relevant pokemondata
+
+gi den position absolute, overflow hidden og plasser den utenfor viewport 
+
+når pokemon blir trykket på, endre position på modal slik at den plasseres midt på skjerm med z-index > 0 og data til pokemon trykket på(sikkert med event.target) 
+
+X- i hjørne reverserer prosessen slik at modalen forsvinner fra viewport igjen
+*/
+
+/*
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+</div>
+*/
