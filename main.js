@@ -34,14 +34,9 @@ async function fetchPokemon(nameOrId) {
 function makePokemonCard(p) {
   const pokemonCard = document.createElement("article");
   pokemonCard.classList.add("pokemonCard");
+  pokemonCard.dataset.id = p.id;
   const pokemonTypes = p.types.map((t) => t.type.name);
-  // console.log(types.length);
-  if (pokemonTypes.length === 2) {
-    pokemonCard.classList.add(pokemonTypes[0]);
-    pokemonCard.classList.add(pokemonTypes[1]);
-  } else {
-    pokemonCard.classList.add(pokemonTypes[0]);
-  }
+  pokemonTypes.forEach((type) => pokemonCard.classList.add(type));
   const pokemonImg = document.createElement("img");
   pokemonImg.classList.add("pokemonImg");
   pokemonImg.src = `ImagesPokemon/${p.name}.png`;
@@ -109,16 +104,11 @@ async function renderTypes() {
       const typeBtn = document.createElement("button");
       typeBtn.classList.add("typeBtn");
       typeBtn.classList.add(typesArray[i]);
-      typeBtn.textContent = typesArray[i];
+      typeBtn.textContent = capitalize(typesArray[i]);
       typeGrid.append(typeBtn);
     }
   }
 }
-
-// const resetBtn = document.createElement("button");
-// resetBtn.id.add("resetBtn");
-// resetBtn.addEventListener("click", renderPokemon);
-// typeGrid.append(resetBtn);
 
 async function filterByType() {
   await renderPokemon(); // await all pokemonCards
@@ -139,13 +129,6 @@ async function filterByType() {
 
 filterByType();
 
-// async function fetchCategory(nameOrId) {
-//   const res = await fetch(`${BASE_URL}/pokemon-species/${nameOrId}`);
-//   return await res.json(); // returns full Pokémon object
-// }
-
-// console.log(fetchCategory("ditto"));
-
 const pokeModal = document.getElementById("myModal");
 const pikachu = fetchPokemon(25);
 
@@ -153,30 +136,38 @@ async function makeModal(p) {
   const pokemon = await fetchPokemon(p);
   console.log(pokemon);
   const idArticle = document.createElement("article");
+  idArticle.classList.add("idArticle");
   const modalID = document.createElement("p");
   modalID.classList.add("modalID");
   modalID.textContent = "#0" + pokemon.id;
   const modalName = document.createElement("p");
   modalName.classList.add("modalName");
-  modalName.textContent = pokemon.name;
+  modalName.textContent = capitalize(pokemon.name);
   const modalImg = document.createElement("img");
   modalImg.classList.add("modalImg");
   modalImg.src = `ImagesPokemon/${pokemon.name}.png`;
   idArticle.append(modalID, modalName, modalImg);
 
   const baseArticle = document.createElement("article");
+  baseArticle.classList.add("baseArticle");
   const modalType = document.createElement("p");
   modalType.classList.add("modalType");
-  modalType.textContent = ;
+  const pokemonTypes = pokemon.types.map((t) => t.type.name);
+  // console.log(typeof pokemonTypes);
+  if (pokemonTypes.length === 2) {
+    modalType.textContent = `Types: ${pokemonTypes[0]}, ${pokemonTypes[1]}`;
+  } else {
+    modalType.textContent = `Type: ${pokemonTypes[0]}`;
+  }
   const modalCategory = document.createElement("p");
   modalCategory.classList.add("modalCategory");
   modalCategory.textContent = "";
   const modalHeight = document.createElement("p");
   modalHeight.classList.add("modalHeight");
-  modalHeight.textContent = "";
+  modalHeight.textContent = `Height: ${(pokemon.height / 10).toFixed(1)} m`;
   const modalWeight = document.createElement("p");
   modalWeight.classList.add("modalWeight");
-  modalWeight.textContent = "";
+  modalWeight.textContent = `Weight: ${(pokemon.weight / 10).toFixed(1)} kg`;
   const modalAbilities = document.createElement("p");
   modalAbilities.classList.add("modalAbilities");
   modalAbilities.textContent = "";
@@ -195,7 +186,35 @@ async function makeModal(p) {
   pokeModal.append(idArticle, baseArticle);
 }
 
-makeModal(25);
+function activateModal() {
+  const pokemonCards = document.querySelectorAll(".pokemonCard");
+  pokemonCards.forEach((card) => {
+    card.addEventListener("click", async () => {
+      const id = card.dataset.id;
+      const pokemon = await fetchPokemon(id);
+      console.log(pokemon);
+      // makeModal(pokemon);
+    });
+  });
+}
+
+activateModal();
+
+// makeModal(25);
+
+// function activateModal() {
+//   const pokemonCards = document.querySelectorAll(".pokemonCard");
+//   pokemonCards.forEach((card) => {
+//     card.addEventListener("click", async () => {
+//       const pokemon = await fetchPokemon(card.id);
+//       makeModal(pokemon);
+//       pokeModal.style.top = "50%";
+//       pokeModal.style.left = "50%";
+//       pokeModal.style.transform = "translate(-50%, -50%)";
+//       pokeModal.style.zIndex = "1";
+//     });
+//   });
+// }
 
 // MODAL  -  Pop-up info on all pokemons
 /*
@@ -205,7 +224,7 @@ gi den position absolute, overflow hidden og plasser den utenfor viewport
 
 når pokemon blir trykket på, endre position på modal slik at den plasseres midt på skjerm med z-index > 0 og data til pokemon trykket på(sikkert med event.target) 
 
-X- i hjørne reverserer prosessen slik at modalen forsvinner fra viewport igjen
+X- i hjørnet reverserer prosessen slik at modalen forsvinner fra viewport igjen
 */
 
 /*
