@@ -6,28 +6,30 @@ OR
 https://pokeapi.co/api/v2/pokemon/1
 All types: https://pokeapi.co/api/v2/type
 
-(`${API_BASE}/pokemon?limit=100000&offset=0`);
+(`${BASE_URL
+}/pokemon?limit=100000&offset=0`);
 ***/
 
-/** Establish api and html-connections */
-const API_BASE = "https://pokeapi.co/api/v2";
+/* Establish api and html-connections */
+const BASE_URL = "https://pokeapi.co/api/v2";
 const searchSection = document.getElementById("searchSection");
 const typeGrid = document.getElementById("typeGrid");
 const pokemonDisplay = document.getElementById("pokemonDisplay");
 
+// Easy function to capitalize the first letter
 function capitalize(s) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
 }
 
-/** Fetch a single Pokémon by name or ID */
+/* Fetch a single Pokémon by name or ID */
 async function fetchPokemon(nameOrId) {
   const res = await fetch(
-    `${API_BASE}/pokemon/${String(nameOrId).toLowerCase()}`
+    `${BASE_URL}/pokemon/${String(nameOrId).toLowerCase()}`
   );
   return await res.json(); // returns full Pokémon object
 }
 
-/**  Making the main display of all pokemon */
+/*  Making the main display of all pokemon */
 function makePokemonCard(p) {
   const pokemonCard = document.createElement("article");
   pokemonCard.classList.add("pokemonCard");
@@ -54,7 +56,7 @@ function makePokemonCard(p) {
 
 /** Fetch the first n Pokémon as an array of objects */
 async function fetchFirstNPokemon(n) {
-  const ids = Array.from({ length: n }, (_, i) => i + 1);
+  const ids = [...Array(n)].map((_, i) => i + 1);
   // console.log(ids);
 
   // Fetch all in parallel
@@ -69,7 +71,7 @@ async function fetchFirstNPokemon(n) {
 /** Showing all pokemons*/
 async function renderPokemon() {
   // Get the first 10 Pokémon
-  const allPokemon = await fetchFirstNPokemon(9);
+  const allPokemon = await fetchFirstNPokemon(151);
   // console.log(typeof allPokemon);
 
   // Iterate easily
@@ -79,7 +81,7 @@ async function renderPokemon() {
 }
 
 async function fetchTypes() {
-  const res = await fetch(`${API_BASE}/type`);
+  const res = await fetch(`${BASE_URL}/type`);
   return await res.json();
 }
 
@@ -99,19 +101,27 @@ async function makeTypeArray() {
 async function renderTypes() {
   await makeTypeArray();
   for (let i = 0; i < 18; i++) {
-    const typeBtn = document.createElement("button");
-    typeBtn.classList.add("typeBtn");
-    typeBtn.classList.add(typesArray[i]);
-    typeBtn.textContent = typesArray[i];
-    typeGrid.append(typeBtn);
+    // [16] = dark, and no dark pokemons within gen 1
+    if (i === 16) {
+      continue;
+    } else {
+      const typeBtn = document.createElement("button");
+      typeBtn.classList.add("typeBtn");
+      typeBtn.classList.add(typesArray[i]);
+      typeBtn.textContent = typesArray[i];
+      typeGrid.append(typeBtn);
+    }
   }
+  const resetBtn = document.createElement("button");
+  resetBtn.id.add("resetBtn");
+  resetBtn.addEventListener("click", renderPokemon);
+  typeGrid.append(resetBtn);
 }
 
 async function filterByType() {
-  await renderPokemon(); // vent til alle kort er laget
-  await renderTypes(); // vent til alle knapper er laget
+  await renderPokemon(); // await all pokemonCards
+  await renderTypes(); // await all typeBtns
 
-  // Nå eksisterer alt i DOM – koble filteret
   const typeButtons = document.querySelectorAll(".typeBtn");
   const pokemonCards = document.querySelectorAll(".pokemonCard");
 
