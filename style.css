@@ -133,6 +133,16 @@ main > 3*section
   align-items: center;
 }
 
+.modal {
+  height: 250px;
+  width: 250px;
+  border: 2px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .pokemonCard {
   width: 200px;
   border: 1px solid black;

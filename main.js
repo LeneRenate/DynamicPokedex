@@ -11,6 +11,7 @@ All types: https://pokeapi.co/api/v2/type
 ***/
 
 /* Establish api and html-connections */
+
 const BASE_URL = "https://pokeapi.co/api/v2";
 const searchSection = document.getElementById("searchSection");
 const typeGrid = document.getElementById("typeGrid");
@@ -54,7 +55,7 @@ function makePokemonCard(p) {
   pokemonDisplay.append(pokemonCard);
 }
 
-/** Fetch the first n Pokémon as an array of objects */
+/* Fetch the first n Pokémon as an array of objects */
 async function fetchFirstNPokemon(n) {
   const ids = [...Array(n)].map((_, i) => i + 1);
   // console.log(ids);
@@ -145,25 +146,28 @@ filterByType();
 
 // console.log(fetchCategory("ditto"));
 
-const pokeModal = document.getElementById("#myModal");
+const pokeModal = document.getElementById("myModal");
+const pikachu = fetchPokemon(25);
 
-async function makeModal() {
+async function makeModal(p) {
+  const pokemon = await fetchPokemon(p);
+  console.log(pokemon);
   const idArticle = document.createElement("article");
   const modalID = document.createElement("p");
   modalID.classList.add("modalID");
-  modalID.textContent = "";
+  modalID.textContent = "#0" + pokemon.id;
   const modalName = document.createElement("p");
   modalName.classList.add("modalName");
-  modalName.textContent = "";
+  modalName.textContent = pokemon.name;
   const modalImg = document.createElement("img");
   modalImg.classList.add("modalImg");
-  modalImg.src = "./ImagesPokemon/${modalName}";
+  modalImg.src = `ImagesPokemon/${pokemon.name}.png`;
   idArticle.append(modalID, modalName, modalImg);
 
   const baseArticle = document.createElement("article");
   const modalType = document.createElement("p");
   modalType.classList.add("modalType");
-  modalType.textContent = "";
+  modalType.textContent = ;
   const modalCategory = document.createElement("p");
   modalCategory.classList.add("modalCategory");
   modalCategory.textContent = "";
@@ -190,6 +194,8 @@ async function makeModal() {
 
   pokeModal.append(idArticle, baseArticle);
 }
+
+makeModal(25);
 
 // MODAL  -  Pop-up info on all pokemons
 /*
