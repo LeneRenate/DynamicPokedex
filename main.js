@@ -36,17 +36,40 @@ function makePokemonCard(p) {
   pokemonCard.classList.add("pokemonCard");
   pokemonCard.dataset.id = p.id;
   const pokemonTypes = p.types.map((t) => t.type.name);
-  pokemonTypes.forEach((type) => pokemonCard.classList.add(type));
+  if (pokemonTypes.length === 2) {
+    pokemonCard.classList.add(pokemonTypes[0]);
+    pokemonCard.classList.add(pokemonTypes[1]);
+    pokemonCard.style.backgroundImage = `
+    linear-gradient(
+      129.8deg,
+      var(--${pokemonTypes[0]}) 30%, 
+      var(--${pokemonTypes[0]}), 
+      var(--${pokemonTypes[1]}), 
+      var(--${pokemonTypes[1]}) 70%
+    )`;
+    // pokemonCard.style.borderColor = `var(--${pokemonTypes[0]}-border)`;
+    pokemonCard.style.borderTopColor = `var(--${pokemonTypes[0]}-border)`;
+    pokemonCard.style.borderLeftColor = `var(--${pokemonTypes[0]}-border)`;
+    pokemonCard.style.borderRightColor = `var(--${pokemonTypes[1]}-border)`;
+    pokemonCard.style.borderBottomColor = `var(--${pokemonTypes[1]}-border)`;
+  } else {
+    pokemonCard.classList.add(pokemonTypes[0]);
+    pokemonCard.style.backgroundColor = `var(--${pokemonTypes[0]})`;
+    pokemonCard.style.borderColor = `var(--${pokemonTypes[0]}-border)`;
+  }
   const pokemonImg = document.createElement("img");
   pokemonImg.classList.add("pokemonImg");
   pokemonImg.src = `ImagesPokemon/${p.name}.png`;
+  const pokemonTag = document.createElement("div");
+  pokemonTag.classList.add("pokemonTag");
   const pokemonNumber = document.createElement("p");
   pokemonNumber.classList.add("pokemonNumber");
   pokemonNumber.textContent = "#" + p.id;
   const pokemonName = document.createElement("p");
   pokemonName.classList.add("pokemonName");
   pokemonName.textContent = capitalize(p.name);
-  pokemonCard.append(pokemonImg, pokemonNumber, pokemonName);
+  pokemonTag.append(pokemonNumber, pokemonName);
+  pokemonCard.append(pokemonImg, pokemonTag);
   pokemonDisplay.append(pokemonCard);
 }
 
@@ -97,17 +120,24 @@ async function makeTypeArray() {
 async function renderTypes() {
   await makeTypeArray();
   for (let i = 0; i < 18; i++) {
-    // [16] = dark, and no dark pokemons within gen 1
-    if (i === 16) {
+    // 8 and 16 represents types not present in gen 1
+    if (i === 8 || i === 16) {
       continue;
     } else {
       const typeBtn = document.createElement("button");
       typeBtn.classList.add("typeBtn");
       typeBtn.classList.add(typesArray[i]);
       typeBtn.textContent = capitalize(typesArray[i]);
+      typeBtn.style.backgroundColor = `var(--${typesArray[i]})`;
+      typeBtn.style.borderColor = `var(--${typesArray[i]}-border)`;
       typeGrid.append(typeBtn);
     }
   }
+
+  const resetBtn = document.createElement("button");
+  resetBtn.classList.add("typeBtn", "resetBtn");
+  resetBtn.textContent = "Show all";
+  typeGrid.append(resetBtn);
 }
 
 async function filterByType() {
@@ -119,7 +149,17 @@ async function filterByType() {
 
   typeButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const type = btn.textContent.trim().toLowerCase();
+      const type = btn.textContent.toLowerCase();
+
+      // ResetBtn
+      if (type === "show all") {
+        pokemonCards.forEach((card) => {
+          card.style.display = "flex";
+        });
+        return;
+      }
+
+      // Actual filter by type-function
       pokemonCards.forEach((card) => {
         card.style.display = card.classList.contains(type) ? "flex" : "none";
       });
@@ -128,111 +168,3 @@ async function filterByType() {
 }
 
 filterByType();
-
-const pokeModal = document.getElementById("myModal");
-const pikachu = fetchPokemon(25);
-
-async function makeModal(p) {
-  const pokemon = await fetchPokemon(p);
-  console.log(pokemon);
-  const idArticle = document.createElement("article");
-  idArticle.classList.add("idArticle");
-  const modalID = document.createElement("p");
-  modalID.classList.add("modalID");
-  modalID.textContent = "#0" + pokemon.id;
-  const modalName = document.createElement("p");
-  modalName.classList.add("modalName");
-  modalName.textContent = capitalize(pokemon.name);
-  const modalImg = document.createElement("img");
-  modalImg.classList.add("modalImg");
-  modalImg.src = `ImagesPokemon/${pokemon.name}.png`;
-  idArticle.append(modalID, modalName, modalImg);
-
-  const baseArticle = document.createElement("article");
-  baseArticle.classList.add("baseArticle");
-  const modalType = document.createElement("p");
-  modalType.classList.add("modalType");
-  const pokemonTypes = pokemon.types.map((t) => t.type.name);
-  // console.log(typeof pokemonTypes);
-  if (pokemonTypes.length === 2) {
-    modalType.textContent = `Types: ${pokemonTypes[0]}, ${pokemonTypes[1]}`;
-  } else {
-    modalType.textContent = `Type: ${pokemonTypes[0]}`;
-  }
-  const modalCategory = document.createElement("p");
-  modalCategory.classList.add("modalCategory");
-  modalCategory.textContent = "";
-  const modalHeight = document.createElement("p");
-  modalHeight.classList.add("modalHeight");
-  modalHeight.textContent = `Height: ${(pokemon.height / 10).toFixed(1)} m`;
-  const modalWeight = document.createElement("p");
-  modalWeight.classList.add("modalWeight");
-  modalWeight.textContent = `Weight: ${(pokemon.weight / 10).toFixed(1)} kg`;
-  const modalAbilities = document.createElement("p");
-  modalAbilities.classList.add("modalAbilities");
-  modalAbilities.textContent = "";
-  baseArticle.append(
-    modalType,
-    modalCategory,
-    modalHeight,
-    modalWeight,
-    modalAbilities
-  );
-
-  // const statsArticle = document.createElement("article");
-
-  // const movesArticle = document.createElement("article");
-
-  pokeModal.append(idArticle, baseArticle);
-}
-
-function activateModal() {
-  const pokemonCards = document.querySelectorAll(".pokemonCard");
-  pokemonCards.forEach((card) => {
-    card.addEventListener("click", async () => {
-      const id = card.dataset.id;
-      const pokemon = await fetchPokemon(id);
-      console.log(pokemon);
-      // makeModal(pokemon);
-    });
-  });
-}
-
-activateModal();
-
-// makeModal(25);
-
-// function activateModal() {
-//   const pokemonCards = document.querySelectorAll(".pokemonCard");
-//   pokemonCards.forEach((card) => {
-//     card.addEventListener("click", async () => {
-//       const pokemon = await fetchPokemon(card.id);
-//       makeModal(pokemon);
-//       pokeModal.style.top = "50%";
-//       pokeModal.style.left = "50%";
-//       pokeModal.style.transform = "translate(-50%, -50%)";
-//       pokeModal.style.zIndex = "1";
-//     });
-//   });
-// }
-
-// MODAL  -  Pop-up info on all pokemons
-/*
-Lag modal i html med placeholders for relevant pokemondata
-
-gi den position absolute, overflow hidden og plasser den utenfor viewport 
-
-når pokemon blir trykket på, endre position på modal slik at den plasseres midt på skjerm med z-index > 0 og data til pokemon trykket på(sikkert med event.target) 
-
-X- i hjørnet reverserer prosessen slik at modalen forsvinner fra viewport igjen
-*/
-
-/*
-<!-- The Modal -->
-<div id="myModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-  </div>
-</div>
-*/
