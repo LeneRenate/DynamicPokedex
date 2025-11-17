@@ -47,7 +47,7 @@ async function makeModal(id) {
   modalType.classList.add("modalType");
   modalType.textContent =
     types.length === 2
-      ? `Types: ${types[0]} & ${types[1]}`
+      ? `Types: ${types[0]} / ${types[1]}`
       : `Type: ${types[0]}`;
 
   const modalCategory = document.createElement("p");

@@ -79,16 +79,18 @@ main > 3*section
 */
 
 /* 
-#typeGrid
-  button  .typeBtn  .{type}
+#pokemonSelect
+  #genSelect
+    button  .genBtn  .{gen}
+  #typeGrid
+    button  .typeBtn  .{type}
 */
 
 #typeGrid {
-  width: 60%;
   margin: 10svh auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 20px 30px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 25px;
 }
 
 .typeBtn {

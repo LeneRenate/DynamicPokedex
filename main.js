@@ -19,10 +19,11 @@ https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/o
 import { renderPokemon } from "./src/render.js";
 import { renderTypes, filterByType } from "./src/types.js";
 import { activateModal } from "./src/modal.js";
+// import { makeGenArray } from "./src/generations.js";
 
 async function main() {
   // Start function
-  await renderPokemon(151); // Render the pokemonCards once
+  await renderPokemon(386); // Render the pokemonCards once
   await renderTypes(); // Render the typeBtns once
   filterByType(); // Add eventlisteners to all typeBtns
   activateModal(); // Add eventlisteners to all pokemonCards

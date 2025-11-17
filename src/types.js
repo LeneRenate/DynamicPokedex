@@ -33,7 +33,7 @@ export function filterByType() {
   typeButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const type = btn.textContent.toLowerCase();
-      console.log("filtering?");
+      // console.log("filtering?");
 
       // ResetBtn
       if (type === "show all") {
