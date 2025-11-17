@@ -1,4 +1,4 @@
-import { fetchFirstNPokemon, IMG_URL, fetchGeneration } from "./api.js";
+import { fetchFirstNPokemon, IMG_URL } from "./api.js";
 import { capitalize, formatID, applyTypeStyles } from "./utils.js";
 
 const pokemonDisplay = document.getElementById("pokemonDisplay");
