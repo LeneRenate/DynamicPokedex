@@ -32,8 +32,10 @@
   --ghost-border: #483960;
   --dragon: #a28993;
   --dragon-border: #644f57;
-  --steel: #eed535;
-  --steel-border: #a4900e;
+  --steel: #9eb7b8;
+  --steel-border: #628384;
+  --dark: #707070;
+  --dark-border: #404040;
   --background: #ddeade;
   --pokeball-light: #d86d62;
   --pokeball-dark: #db3d2f;
@@ -46,10 +48,9 @@
 }
 
 body {
-  width: 100svw;
+  width: 100%;
   background-color: var(--background);
   font-family: calibri, sans-serif;
-  font-size: 16px;
 }
 
 header {
@@ -101,6 +102,11 @@ main > 3*section
   border-color: var(--pokeball-dark);
 }
 
+button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgb(60, 60, 60);
+}
+
 /*  
 #pokemonDisplay
 > article  .pokemonCard  .{type}
@@ -121,9 +127,10 @@ main > 3*section
 }
 
 .pokemonCard {
-  width: 225px;
-  height: 275px;
-  margin: 20px;
+  /* width: 225px;
+  height: 275px; */
+  margin: 15px;
+  padding: 15px;
   border: 3px solid;
   border-radius: 10px;
 
@@ -133,9 +140,13 @@ main > 3*section
   align-items: center;
 }
 
+.pokemonCard:hover {
+  cursor: pointer;
+}
+
 .pokemonImg {
-  width: 175px;
-  height: 175px;
+  width: 125px;
+  height: 125px;
 }
 
 .pokemonTag {
@@ -156,4 +167,69 @@ main > 3*section
 
 .pokemonName {
   font-size: 1.25rem;
+}
+
+/* Modal */
+
+#close {
+  width: 20px;
+  height: 20px;
+
+  border: 1px solid rgb(27, 27, 27);
+
+  position: relative;
+  top: 10%;
+  left: 95%;
+
+  text-align: center;
+}
+
+#close:hover {
+  cursor: pointer;
+}
+
+#myModal {
+  border: 2px solid;
+  /* background-color: white; */
+  position: fixed;
+  /* top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; */
+  top: -100%;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+/*  */
+.idArticle {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.modalID {
+  font-family: monospace;
+  font-size: 1.25rem;
+}
+
+.modalName {
+  font-family: monospace;
+  font-size: 1.5rem;
+}
+
+.modalImg {
+  height: 250px;
+  width: 250px;
+}
+
+.baseArticle {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  padding: 0.5rem;
 }

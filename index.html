@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>PokeDex</title>
-    <script src="main.js" defer></script>
+    <script type="module" src="main.js"></script>
   </head>
   <body>
     <header>
@@ -18,15 +18,25 @@
       </a>
       <img
         src="https://fontmeme.com/permalink/251105/2b24d8746889672115f71bba6a127b14.png"
-        alt="pokemon-font"
+        alt="PokeDex - in pokemon-font"
         id="HeadingImg"
-        border="0"
       />
     </header>
     <main>
       <section id="searchSection"></section>
-      <section id="typeGrid"></section>
+      <div id="pokemonSelect">
+        <section id="genSelect"></section>
+        <section id="typeGrid"></section>
+      </div>
       <section id="pokemonDisplay"></section>
+
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span id="close">X</span>
+        </div>
+      </div>
     </main>
   </body>
 </html>
