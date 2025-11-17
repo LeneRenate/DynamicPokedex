@@ -1,5 +1,10 @@
-import { fetchPokemon, IMG_URL, fetchCategory } from "./api.js";
-import { capitalize, formatID, applyTypeStyles } from "./utils.js";
+import { fetchPokemon, IMG_URL } from "./api.js";
+import {
+  capitalize,
+  formatID,
+  applyTypeStyles,
+  fetchCategory,
+} from "./utils.js";
 
 // MODAL  -  Pop-up info on all pokemons
 const pokeModal = document.getElementById("myModal");
@@ -47,8 +52,8 @@ async function makeModal(id) {
 
   const modalCategory = document.createElement("p");
   modalCategory.classList.add("modalCategory");
-  const category = fetchCategory(id);
-  // console.log(category);
+  const category = await fetchCategory(id);
+  console.log(typeof category);
   modalCategory.textContent = `Category: ${category}`;
 
   const modalHeight = document.createElement("p");

@@ -22,7 +22,7 @@ import { activateModal } from "./src/modal.js";
 
 async function main() {
   // Start function
-  await renderPokemon(); // Render the pokemonCards once
+  await renderPokemon(151); // Render the pokemonCards once
   await renderTypes(); // Render the typeBtns once
   filterByType(); // Add eventlisteners to all typeBtns
   activateModal(); // Add eventlisteners to all pokemonCards

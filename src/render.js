@@ -1,14 +1,20 @@
 import { fetchFirstNPokemon, IMG_URL } from "./api.js";
-import { capitalize, formatID, applyTypeStyles } from "./utils.js";
+import {
+  capitalize,
+  formatID,
+  applyTypeStyles,
+  fetchGeneration,
+} from "./utils.js";
 
 const pokemonDisplay = document.getElementById("pokemonDisplay");
 
 /*  Making the main display of all pokemon */
-export function makePokemonCard(p) {
+export async function makePokemonCard(p) {
   const pokemonCard = document.createElement("article");
   pokemonCard.classList.add("pokemonCard");
   pokemonCard.dataset.id = p.id;
-  // pokemonCard.classList.add(`${fetchGeneration(p.id)}`);
+  const generation = await fetchGeneration(p.id);
+  pokemonCard.classList.add(`${generation}`);
 
   // For styling purposes
   const pokemonTag = document.createElement("div");
@@ -41,9 +47,9 @@ export function makePokemonCard(p) {
 }
 
 /** Showing all pokemons*/
-export async function renderPokemon() {
+export async function renderPokemon(n) {
   // Get the first n Pokémon
-  const allPokemon = await fetchFirstNPokemon(151);
+  const allPokemon = await fetchFirstNPokemon(n);
   // Gen 1 - 3: 386
   // console.log(typeof allPokemon);
 

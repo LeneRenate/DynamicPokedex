@@ -32,9 +32,8 @@ export async function fetchTypes() {
 
 // console.log(fetchTypes());
 
-/**
 // Species
-async function fetchSpecies(id) {
+export async function fetchSpecies(id) {
   const res = await fetch(`${BASE_URL}/pokemon-species/${id}`);
   return await res.json();
   // const data = await res.json();
@@ -42,36 +41,3 @@ async function fetchSpecies(id) {
 }
 
 // console.log(fetchSpecies());
-**/
-
-// Cheat-category?
-export async function fetchCategory(id) {
-  const res = await fetch(``);
-}
-
-/**
-// Category
-export async function fetchCategory(id) {
-  const species = await fetchSpecies(id);
-  const genera = species.genera.find((e) => e.language.name === "en");
-  const category = genera.genus;
-  return category;
-  // console.log(category.toLowerCase());
-}
-
-console.log(fetchCategory(1));
-// fetchCategory(1);
-**/
-
-/** 
-// Generation
-export async function fetchGeneration(id) {
-  const species = await fetchSpecies(id);
-  const findGeneration = species.generation;
-  const generation = findGeneration.name;
-  // return generation;
-  console.log(typeof generation);
-}
-
-// fetchGeneration(1);
-**/

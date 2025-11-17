@@ -1,3 +1,5 @@
+import { fetchSpecies } from "./api.js";
+
 // Easy function to capitalize the first letter
 export function capitalize(s) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
@@ -32,3 +34,26 @@ export function applyTypeStyles(element, types) {
     element.style.borderColor = `var(--${t}-border)`;
   }
 }
+
+// Category
+export async function fetchCategory(id) {
+  const species = await fetchSpecies(id);
+  const genera = species.genera.find((e) => e.language.name === "en");
+  const category = genera.genus;
+  return category.toLowerCase();
+}
+
+// console.log(fetchCategory(1));
+// fetchCategory(1);
+
+// Generation
+export async function fetchGeneration(id) {
+  const species = await fetchSpecies(id);
+  const findGeneration = species.generation;
+  const generation = findGeneration.name;
+  // console.log(generation);
+  // console.log(typeof generation);
+  return generation;
+}
+
+// fetchGeneration(1);
