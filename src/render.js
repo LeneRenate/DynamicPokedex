@@ -4,6 +4,7 @@ import {
   formatID,
   applyTypeStyles,
   fetchGeneration,
+  normalizeGeneration,
 } from "./utils.js";
 
 const pokemonDisplay = document.getElementById("pokemonDisplay");
@@ -13,8 +14,10 @@ export async function makePokemonCard(p) {
   const pokemonCard = document.createElement("article");
   pokemonCard.classList.add("pokemonCard");
   pokemonCard.dataset.id = p.id;
-  const generation = await fetchGeneration(p.id);
-  pokemonCard.classList.add(`${generation}`);
+  const generationString = await fetchGeneration(p.id);
+  const generation = normalizeGeneration(generationString);
+
+  pokemonCard.classList.add(`gen${generation}`);
 
   // For styling purposes
   const pokemonTag = document.createElement("div");

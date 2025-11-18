@@ -5,35 +5,30 @@ Add eventlistener to all btns
 Reset? Or?
 **/
 
-const genRanges = {
-  1: [1, 151],
-  2: [152, 251],
-  3: [252, 386],
-  4: [387, 493],
-  5: [494, 649],
-  6: [650, 721],
-  7: [722, 809],
-  8: [810, 905],
-  9: [906, 1025],
-};
-
-const genButtons = document.querySelectorAll(".genBtn");
-const pokemonCards = document.querySelectorAll(".pokemonCard");
-
 let selectedGens = [];
 
 export function genToggle() {
+  const genButtons = document.querySelectorAll(".genBtn");
+
+  if (!genButtons.length) {
+    console.warn("Ingen .genBtn funnet når genToggle kjøres");
+  }
+
   genButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       console.log("genBtn pressed");
-      const gen = btn.dataset.gen;
-
+      const gen = String(btn.dataset.gen);
+      console.log(gen);
       btn.classList.toggle("active");
 
       if (btn.classList.contains("active")) {
-        selectedGens.push(gen);
+        if (!selectedGens.includes(gen)) selectedGens.push(gen);
+        btn.style.backgroundColor = "seagreen";
+        btn.style.boxShadow = "0px 0px 5px mediumseagreen";
       } else {
         selectedGens = selectedGens.filter((g) => g !== gen);
+        btn.style.backgroundColor = "white";
+        btn.style.boxShadow = "none";
       }
 
       filterPokemonCards();
@@ -42,14 +37,18 @@ export function genToggle() {
 }
 
 function filterPokemonCards() {
+  // Hent kortene NÅ, ikke ved import
+  const pokemonCards = document.querySelectorAll(".pokemonCard");
+
   pokemonCards.forEach((card) => {
-    const cardGen = card.dataset.generation;
+    const match = selectedGens.some((gen) =>
+      card.classList.contains(`gen${gen}`)
+    );
 
     if (selectedGens.length === 0) {
-      card.style.display = "block";
-      return;
+      card.style.display = "flex"; // eller "" om du vil bruke CSS-default
+    } else {
+      card.style.display = match ? "flex" : "none";
     }
-
-    card.style.display = selectedGens.includes(cardGen) ? "block" : "none";
   });
 }
