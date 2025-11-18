@@ -86,6 +86,20 @@ main > 3*section
     button  .typeBtn  .{type}
 */
 
+/* 
+#pokemonSelect {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+} */
+
+#genSelect {
+  margin: 10svh auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px 20px;
+}
+
 #typeGrid {
   margin: 10svh auto;
   display: grid;
@@ -93,7 +107,8 @@ main > 3*section
   gap: 20px 25px;
 }
 
-.typeBtn {
+.typeBtn,
+.genBtn {
   padding: 10px;
   border-radius: 10px;
   border: 1.5px solid;

@@ -18,16 +18,38 @@ const genRanges = {
 };
 
 const genButtons = document.querySelectorAll(".genBtn");
+const pokemonCards = document.querySelectorAll(".pokemonCard");
 
-genButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    console.log("GenBtn pressed");
-    const gen = btn.dataset.gen;
-    const [start, end] = genRanges[gen];
+let selectedGens = [];
 
-    pokemonCards.forEach((card) => {
-      const id = Number(card.dataset.id);
-      card.style.display = id >= start && id <= end ? "block" : "none";
+export function genToggle() {
+  genButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      console.log("genBtn pressed");
+      const gen = btn.dataset.gen;
+
+      btn.classList.toggle("active");
+
+      if (btn.classList.contains("active")) {
+        selectedGens.push(gen);
+      } else {
+        selectedGens = selectedGens.filter((g) => g !== gen);
+      }
+
+      filterPokemonCards();
     });
   });
-});
+}
+
+function filterPokemonCards() {
+  pokemonCards.forEach((card) => {
+    const cardGen = card.dataset.generation;
+
+    if (selectedGens.length === 0) {
+      card.style.display = "block";
+      return;
+    }
+
+    card.style.display = selectedGens.includes(cardGen) ? "block" : "none";
+  });
+}
