@@ -50,9 +50,9 @@ export async function makePokemonCard(p) {
 }
 
 /** Showing all pokemons*/
-export async function renderPokemon() {
+export async function renderPokemon(n) {
   // Get the first n Pokémon
-  const allPokemon = await fetchFirstNPokemon(386);
+  const allPokemon = await fetchFirstNPokemon(n);
   // Gen 1 - 3: 386
   // console.log(typeof allPokemon);
 

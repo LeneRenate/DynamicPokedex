@@ -1,10 +1,3 @@
-/**
-Make btn for all generations
-Add eventlistener to all btns
-    > filter-function
-Reset? Or?
-**/
-
 let selectedGens = [];
 
 export function genToggle() {
@@ -37,7 +30,6 @@ export function genToggle() {
 }
 
 function filterPokemonCards() {
-  // Hent kortene NÅ, ikke ved import
   const pokemonCards = document.querySelectorAll(".pokemonCard");
 
   pokemonCards.forEach((card) => {
@@ -46,7 +38,7 @@ function filterPokemonCards() {
     );
 
     if (selectedGens.length === 0) {
-      card.style.display = "flex"; // eller "" om du vil bruke CSS-default
+      card.style.display = "flex";
     } else {
       card.style.display = match ? "flex" : "none";
     }

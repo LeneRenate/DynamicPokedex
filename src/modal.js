@@ -47,26 +47,26 @@ async function makeModal(id) {
   modalType.classList.add("modalType");
   modalType.textContent =
     types.length === 2
-      ? `Types: ${types[0]} / ${types[1]}`
-      : `Type: ${types[0]}`;
+      ? `TYPES: ${types[0]} / ${types[1]}`
+      : `TYPE: ${types[0]}`;
 
   const modalCategory = document.createElement("p");
   modalCategory.classList.add("modalCategory");
   const category = await fetchCategory(id);
   console.log(typeof category);
-  modalCategory.textContent = `Category: ${category}`;
+  modalCategory.textContent = `CATEGORY: ${category}`;
 
   const modalHeight = document.createElement("p");
   modalHeight.classList.add("modalHeight");
-  modalHeight.textContent = `Height: ${(pokemon.height / 10).toFixed(1)} m`;
+  modalHeight.textContent = `HEIGHT: ${(pokemon.height / 10).toFixed(1)} m`;
 
   const modalWeight = document.createElement("p");
   modalWeight.classList.add("modalWeight");
-  modalWeight.textContent = `Weight: ${(pokemon.weight / 10).toFixed(1)} kg`;
+  modalWeight.textContent = `WEIGHT: ${(pokemon.weight / 10).toFixed(1)} kg`;
 
   const modalAbilities = document.createElement("p");
   modalAbilities.classList.add("modalAbilities");
-  modalAbilities.textContent = `Abilities: ${pokemon.abilities
+  modalAbilities.textContent = `ABILITIES: ${pokemon.abilities
     .map((a) => a.ability.name)
     .join(", ")}`;
 
