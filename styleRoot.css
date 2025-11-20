@@ -43,9 +43,9 @@
   --gen2: cornflowerblue;
   --gen3: yellow;
   --gen4: darkblue;
-  --gen5: green;
-  --gen6: black;
-  --gen7: blueviolet;
+  --gen5: lime;
+  --gen6: rgb(91, 91, 91);
+  --gen7: violet;
   --gen8: deeppink;
   --gen9: orange;
 }

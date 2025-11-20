@@ -8,7 +8,8 @@ export function genToggle() {
   }
 
   genButtons.forEach((btn) => {
-    genButtons.style.borderColor = `var(--gen${data.gen})`;
+    console.log(String(btn.dataset.gen));
+    btn.style.borderColor = `var(--gen${String(btn.dataset.gen)})`;
     btn.addEventListener("click", () => {
       console.log("genBtn pressed");
       const gen = String(btn.dataset.gen);
@@ -21,7 +22,7 @@ export function genToggle() {
         btn.style.boxShadow = "0px 0px 5px mediumseagreen";
       } else {
         selectedGens = selectedGens.filter((g) => g !== gen);
-        btn.style.backgroundColor = "white";
+        btn.style.backgroundColor = "#F0F0F0";
         btn.style.boxShadow = "none";
       }
 

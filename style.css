@@ -79,12 +79,13 @@ main > 3*section
 .genBtn {
   padding: 10px;
   border-radius: 10px;
-  border: 1.5px solid;
+  border: 1.5px solid white;
 }
 
 .genBtn {
   max-width: 110px;
   height: 40px;
+  border: 2.5px solid white;
 }
 
 .genBtn:active {
