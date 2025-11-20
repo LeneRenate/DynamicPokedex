@@ -39,4 +39,13 @@
   --background: #ddeade;
   --pokeball-light: #d86d62;
   --pokeball-dark: #db3d2f;
+  --gen1: red;
+  --gen2: cornflowerblue;
+  --gen3: yellow;
+  --gen4: darkblue;
+  --gen5: green;
+  --gen6: black;
+  --gen7: blueviolet;
+  --gen8: deeppink;
+  --gen9: orange;
 }

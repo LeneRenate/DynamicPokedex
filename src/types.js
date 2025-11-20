@@ -11,7 +11,7 @@ async function makeTypeArray() {
 export async function renderTypes() {
   const types = await makeTypeArray();
 
-  types.forEach((t, i) => {
+  types.forEach((t) => {
     const btn = document.createElement("button");
     btn.classList.add("typeBtn", t);
     btn.textContent = capitalize(t);

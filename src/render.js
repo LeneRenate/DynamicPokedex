@@ -18,6 +18,7 @@ export async function makePokemonCard(p) {
   const generation = normalizeGeneration(generationString);
 
   pokemonCard.classList.add(`gen${generation}`);
+  pokemonCard.style.borderColor = `var(--gen${generation})`;
 
   // For styling purposes
   const pokemonTag = document.createElement("div");

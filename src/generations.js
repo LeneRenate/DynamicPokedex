@@ -8,6 +8,7 @@ export function genToggle() {
   }
 
   genButtons.forEach((btn) => {
+    genButtons.style.borderColor = `var(--gen${data.gen})`;
     btn.addEventListener("click", () => {
       console.log("genBtn pressed");
       const gen = String(btn.dataset.gen);
