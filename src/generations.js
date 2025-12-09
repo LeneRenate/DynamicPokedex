@@ -1,48 +1,33 @@
-let selectedGens = [];
+import { applyFilters, selectedGens } from "./filters.js";
 
 export function genToggle() {
   const genButtons = document.querySelectorAll(".genBtn");
 
-  if (!genButtons.length) {
-    console.warn("Ingen .genBtn funnet når genToggle kjøres");
-  }
-
   genButtons.forEach((btn) => {
-    console.log(String(btn.dataset.gen));
-    btn.style.borderColor = `var(--gen${String(btn.dataset.gen)})`;
+    btn.style.borderColor = `var(--gen${btn.dataset.gen})`;
+
     btn.addEventListener("click", () => {
       console.log("genBtn pressed");
-      const gen = String(btn.dataset.gen);
-      console.log(gen);
+      const gen = Number(btn.dataset.gen);
       btn.classList.toggle("active");
 
       if (btn.classList.contains("active")) {
-        if (!selectedGens.includes(gen)) selectedGens.push(gen);
+        if (!selectedGens.includes(gen)) {
+          selectedGens.push(gen);
+        }
         btn.style.backgroundColor = "seagreen";
         btn.style.boxShadow = "0px 0px 5px mediumseagreen";
       } else {
-        selectedGens = selectedGens.filter((g) => g !== gen);
+        const idx = selectedGens.indexOf(gen);
+        if (idx !== -1) {
+          selectedGens.splice(idx, 1);
+        }
         btn.style.backgroundColor = "#F0F0F0";
         btn.style.boxShadow = "none";
       }
 
-      filterPokemonCards();
+      // filterPokemonCards();
+      applyFilters();
     });
-  });
-}
-
-function filterPokemonCards() {
-  const pokemonCards = document.querySelectorAll(".pokemonCard");
-
-  pokemonCards.forEach((card) => {
-    const match = selectedGens.some((gen) =>
-      card.classList.contains(`gen${gen}`)
-    );
-
-    if (selectedGens.length === 0) {
-      card.style.display = "flex";
-    } else {
-      card.style.display = match ? "flex" : "none";
-    }
   });
 }

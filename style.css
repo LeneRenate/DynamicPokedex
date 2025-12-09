@@ -88,11 +88,6 @@ main > 3*section
   border: 2.5px solid white;
 }
 
-.genBtn:active {
-  background-color: seagreen;
-  box-shadow: 0 0 5px mediumseagreen;
-}
-
 .resetBtn {
   background-color: var(--pokeball-light);
   border-color: var(--pokeball-dark);

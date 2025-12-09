@@ -1,4 +1,5 @@
 import { fetchTypes } from "./api.js";
+import { applyFilters, setSelectedType } from "./filters.js";
 import { capitalize } from "./utils.js";
 
 const typeGrid = document.getElementById("typeGrid");
@@ -28,23 +29,20 @@ export async function renderTypes() {
 
 export function filterByType() {
   const typeButtons = document.querySelectorAll(".typeBtn");
-  const pokemonCards = document.querySelectorAll(".pokemonCard");
 
   typeButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const type = btn.textContent.toLowerCase();
-      // console.log("filtering?");
+      const type = btn.dataset.type;
+      console.log("filtering?");
 
-      // ResetBtn
       if (type === "show all") {
-        pokemonCards.forEach((card) => (card.style.display = "flex"));
-        return;
+        setSelectedType(null);
+      } else {
+        // Actual filter by type-function
+        setSelectedType(type);
       }
 
-      // Actual filter by type-function
-      pokemonCards.forEach((card) => {
-        card.style.display = card.classList.contains(type) ? "flex" : "none";
-      });
+      applyFilters();
     });
   });
 }

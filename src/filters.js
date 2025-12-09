@@ -1,13 +1,16 @@
+export const selectedGens = [];
 export let selectedType = null;
-export let selectedGens = [];
 
 export function applyFilters() {
   const cards = document.querySelectorAll(".pokemonCard");
 
   cards.forEach((card) => {
-    const cardGen = [...card.classList]
-      .find((c) => c.startsWith("gen"))
-      ?.slice(3);
+    // Gen-check
+    const cardGen = Number(
+      [...card.classList].find((c) => c.startsWith("gen"))?.slice(3)
+    );
+
+    // Type-check
     const cardTypes = [...card.classList];
 
     const matchGen =
