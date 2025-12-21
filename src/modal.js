@@ -19,9 +19,18 @@ async function makeModal(id) {
 
   // Apply background & border colors based on type(s)
   applyTypeStyles(pokeModal, types);
+  if (types.length === 2) {
+    const [t1, t2] = types;
+    pokeModal.style.borderTopColor = `var(--${t1}-border)`;
+    pokeModal.style.borderLeftColor = `var(--${t1}-border)`;
+    pokeModal.style.borderRightColor = `var(--${t2}-border)`;
+    pokeModal.style.borderBottomColor = `var(--${t2}-border)`;
+  } else {
+    const t = types[0];
+    pokeModal.style.borderColor = `var(--${t}-border)`;
+  }
 
   // Header > ID, name & img
-
   const idArticle = document.createElement("article");
   idArticle.classList.add("idArticle");
 

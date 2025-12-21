@@ -57,8 +57,11 @@ export async function renderPokemon(n) {
   // Gen 1 - 3: 386
   // console.log(typeof allPokemon);
 
-  // Iterate easily
-  allPokemon.forEach((p) => {
-    makePokemonCard(p);
-  });
+  // Sort by ID in ascending order (1, 2, 3, ...)
+  allPokemon.sort((a, b) => a.id - b.id);
+
+  // Wait for all cards to be created in order
+  for (const p of allPokemon) {
+    await makePokemonCard(p);
+  }
 }
