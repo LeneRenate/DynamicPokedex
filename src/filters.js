@@ -21,3 +21,7 @@ export function applyFilters() {
     card.style.display = matchGen && matchType ? "flex" : "none";
   });
 }
+
+export function setSelectedType(type) {
+  selectedType = type;
+}

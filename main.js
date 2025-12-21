@@ -23,7 +23,7 @@ import { genToggle } from "./src/generations.js";
 
 async function main() {
   // Start function
-  await renderPokemon(1025); // Render the pokemonCards once
+  await renderPokemon(386); // Render the pokemonCards once
   await renderTypes(); // Render the typeBtns once
   filterByType(); // Add eventlisteners to all typeBtns
   activateModal(); // Add eventlisteners to all pokemonCards

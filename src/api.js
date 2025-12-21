@@ -19,6 +19,8 @@ export async function fetchFirstNPokemon(n) {
   // Fetch all in parallel
   const pokemonArray = await Promise.all(ids.map((id) => fetchPokemon(id)));
 
+  console.log(pokemonArray);
+
   // Return array of Pokémon objects
   return pokemonArray;
 }
