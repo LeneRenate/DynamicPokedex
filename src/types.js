@@ -15,6 +15,7 @@ export async function renderTypes() {
   types.forEach((t) => {
     const btn = document.createElement("button");
     btn.classList.add("typeBtn", t);
+    btn.dataset.type = t;
     btn.textContent = capitalize(t);
     btn.style.backgroundColor = `var(--${t})`;
     btn.style.borderColor = `var(--${t}-border)`;
@@ -23,6 +24,7 @@ export async function renderTypes() {
 
   const resetBtn = document.createElement("button");
   resetBtn.classList.add("typeBtn", "resetBtn");
+  resetBtn.dataset.type = "show all";
   resetBtn.textContent = "Show all";
   typeGrid.append(resetBtn);
 }

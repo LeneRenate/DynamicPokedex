@@ -61,5 +61,4 @@ export async function renderPokemon(n) {
   allPokemon.forEach((p) => {
     makePokemonCard(p);
   });
-  allPokemon = allPokemon.sort((a, b) => b.id - a.id);
 }
