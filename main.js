@@ -23,7 +23,12 @@ import { genToggle } from "./src/generations.js";
 import { applyFilters, selectedGens } from "./src/filters.js";
 
 async function main() {
+  const loadingScreen = document.getElementById("loadingScreen");
+
   // Start function
+  await renderTypes(); // Render the typeBtns once
+  filterByType(); // Add eventlisteners to all typeBtns
+
   await renderPokemon(1025); // Render all the pokemonCards once
 
   // Only show gen 1 on load, with active toggle on gen1-btn
@@ -37,10 +42,11 @@ async function main() {
     gen1Btn.style.boxShadow = "0px 0px 5px mediumseagreen";
   }
 
-  await renderTypes(); // Render the typeBtns once
-  filterByType(); // Add eventlisteners to all typeBtns
   activateModal(); // Add eventlisteners to all pokemonCards
   genToggle();
+
+  // Hide loading screen when everything is done
+  loadingScreen.style.display = "none";
 }
 
 main();
