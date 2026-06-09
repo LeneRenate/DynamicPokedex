@@ -7,6 +7,7 @@
 body {
   width: 100%;
   background-color: var(--background);
+  background: url(./images/GrassBackground.jpg) center/cover no-repeat fixed;
   font-family: calibri, sans-serif;
 }
 
@@ -78,8 +79,12 @@ header {
 }
 
 #pokedexImg {
-  height: 15svh;
+  height: 75%;
   margin: 2svh 5svw;
+}
+
+#imgContainer {
+  height: 80%;
 }
 
 /* 
