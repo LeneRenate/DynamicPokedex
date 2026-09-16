@@ -31,3 +31,38 @@ export function genToggle() {
     });
   });
 }
+
+export function findGeneration(pokeId) {
+  const id = pokeId;
+  let generation = "";
+  switch (true) {
+    case id <= 151:
+      generation = "1";
+      break;
+    case id <= 251:
+      generation = "2";
+      break;
+    case id <= 386:
+      generation = "3";
+      break;
+    case id <= 493:
+      generation = "4";
+      break;
+    case id <= 649:
+      generation = "5";
+      break;
+    case id <= 721:
+      generation = "6";
+      break;
+    case id <= 809:
+      generation = "7";
+      break;
+    case id <= 905:
+      generation = "8";
+      break;
+    case id <= 1025:
+      generation = "9";
+      break;
+  }
+  return generation;
+}

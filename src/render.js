@@ -1,11 +1,6 @@
 import { fetchFirstNPokemon, IMG_URL } from "./api.js";
-import {
-  capitalize,
-  formatID,
-  applyTypeStyles,
-  fetchGeneration,
-  normalizeGeneration,
-} from "./utils.js";
+import { findGeneration } from "./generations.js";
+import { capitalize, formatID, applyTypeStyles } from "./utils.js";
 
 const pokemonDisplay = document.getElementById("pokemonDisplay");
 
@@ -14,8 +9,8 @@ export async function makePokemonCard(p) {
   const pokemonCard = document.createElement("article");
   pokemonCard.classList.add("pokemonCard");
   pokemonCard.dataset.id = p.id;
-  const generationString = await fetchGeneration(p.id);
-  const generation = normalizeGeneration(generationString);
+  const generation = findGeneration(p.id);
+  console.log(generation);
 
   pokemonCard.classList.add(`gen${generation}`);
   pokemonCard.style.borderColor = `var(--gen${generation})`;
@@ -52,16 +47,10 @@ export async function makePokemonCard(p) {
 
 /** Showing all pokemons*/
 export async function renderPokemon(n) {
-  // Get the first n Pokémon
   const allPokemon = await fetchFirstNPokemon(n);
-  // Gen 1 - 3: 386
-  // console.log(typeof allPokemon);
 
   // Sort by ID in ascending order (1, 2, 3, ...)
   allPokemon.sort((a, b) => a.id - b.id);
 
-  // Wait for all cards to be created in order
-  for (const p of allPokemon) {
-    await makePokemonCard(p);
-  }
+  Promise.all(allPokemon.map((p) => makePokemonCard(p)));
 }

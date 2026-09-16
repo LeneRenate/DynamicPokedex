@@ -7,7 +7,8 @@
 body {
   width: 100%;
   background-color: var(--background);
-  background: url(./images/GrassBackground.jpg) center/cover no-repeat fixed;
+  background: url(./images/GrassBackground_transparent.png) center/cover
+    no-repeat fixed;
   font-family: calibri, sans-serif;
 }
 
@@ -74,17 +75,25 @@ header {
   position: sticky;
   top: 0;
 
+  padding-left: 3svw;
+
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 4svw;
 }
 
 #pokedexImg {
-  height: 75%;
-  margin: 2svh 5svw;
+  height: 15svh;
 }
 
 #imgContainer {
   height: 80%;
+}
+
+#logo {
+  height: 100%;
+  width: auto;
 }
 
 /* 

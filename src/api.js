@@ -6,7 +6,7 @@ export const IMG_URL =
 /* Fetch a single Pokémon by name or ID */
 export async function fetchPokemon(nameOrId) {
   const res = await fetch(
-    `${BASE_URL}/pokemon/${String(nameOrId).toLowerCase()}`
+    `${BASE_URL}/pokemon/${String(nameOrId).toLowerCase()}`,
   );
   return await res.json(); // returns full Pokémon object
 }
@@ -18,8 +18,6 @@ export async function fetchFirstNPokemon(n) {
 
   // Fetch all in parallel
   const pokemonArray = await Promise.all(ids.map((id) => fetchPokemon(id)));
-
-  console.log(pokemonArray);
 
   // Return array of Pokémon objects
   return pokemonArray;
