@@ -25,6 +25,16 @@ The Pokédex is my go-to project whenever I pick up something new. Building the 
 - **Detail Modal** — Click any card to open a modal with extended info: type(s), category, height, weight, and abilities. Modal border colors reflect the Pokémon's type(s).
 - **Loading screen** — Animated Pokéball loader while the initial data is being fetched.
 
+## Screenshots
+
+| Homepage (Gen I) | Detail Modal |
+| --- | --- |
+| ![Homepage showing the generation and type filters with Gen I Pokémon cards](docs/screenshots/Homepage.png) | ![Detail modal for Squirtle showing type, category, height, weight, and abilities](docs/screenshots/Detail_modal.png) |
+
+| Ghost type filter (all generations) | Combined Generation + Type filters |
+| --- | --- |
+| ![Ghost-type Pokémon filtered across all generations](<docs/screenshots/Ghost-filter(all_gens).png>) | ![Gen V and Ice type filters combined, showing only Ice-type Pokémon from Gen V](docs/screenshots/Both_filters.png) |
+
 ## Tech Stack
 
 - Vanilla HTML, CSS, and JavaScript (ES Modules — no frameworks, no bundler)
